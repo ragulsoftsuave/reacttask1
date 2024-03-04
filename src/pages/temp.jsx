@@ -1,58 +1,42 @@
-export default function Temp(params) {
-    return (
-    <form action="" method="post">
-        <fieldset>
-            <legend>Personal Information</legend>
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" required/>
-            <br/>
-            <label for="initial">Initial:</label>
-            <input type="text" id="initial" name="initial" maxlength="1"/>
-            <br/>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required/>
-            <br/>
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone"/>
-            <br/>
-            <label for="address">Address:</label>
-            <textarea id="address" name="address" rows="5" required></textarea>
-        </fieldset>
+import { zodResolver } from '@hookform/resolvers/zod';
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import z from "zod";
+const schema = z
+  .object({
+    mySelect: z.string().min(1, "Name is required")})
+const MyForm = () => {
+  const { control, handleSubmit,
+    formState: { errors }, } = useForm({ resolver: zodResolver(schema) });
 
-        <fieldset>
-            <legend>Location</legend>
-            <label for="country">Country:</label>
-            <select id="country" name="country">
-                <option value="">Select Country</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="UK">United Kingdom</option>
-                <option value="AU">Australia</option>
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {/* Other form fields can go here */}
+
+      <div>
+        <label htmlFor="mySelect">Select an option:</label>
+        <Controller
+          name="mySelect" // Should match the field name in the form data
+          control={control}
+          defaultValue="" // Set the default value
+          render={({ field }) => (
+            <select {...field}>
+              <option value="" disabled>Select an option</option>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
             </select>
-            <br/>
-            <label for="state">State/Province:</label>
-            <select id="state" name="state">
-                <option value="">Select State/Province</option>
-                </select>
-            <br/>
-            <label for="district">District/City:</label>
-            <select id="district" name="district">
-                <option value="">Select District/City</option>
-                </select>
-        </fieldset>
-
-        <fieldset>
-            <legend>Login Information</legend>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required/>
-            <br/>
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required/>
-            <br/>
-            <span id="password_error" style={{color: "red"}}></span>
-        </fieldset>
-
-        <input type="submit" value="Register"/>
+          )}
+        />
+      </div>
+      {<div >{errors.mySelect?.message}</div>}
+      <button type="submit">Submit</button>
     </form>
-    );
-}
+  );
+};
+
+export default MyForm;

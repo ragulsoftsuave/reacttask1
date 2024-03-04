@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Country, State, City } from "country-state-city";
-import "../assets/styles/register.css";
+// import "../assets/styles/register.css";
+import regi from '../assets/styles/register.module.css';
 import Input, { Select, TextArea } from "../components/hook-form/Input";
 import { FormContext } from "../components/hook-form/FormContext";
+import { Link } from "react-router-dom";
 
 let countriesArr = Country.getAllCountries();
 let statesArr = undefined;
@@ -51,6 +53,7 @@ const schema = z
 
 export default function Register() {
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -68,14 +71,18 @@ export default function Register() {
   const handleStateChange = (event) => {
     setDistrictsArr(City.getCitiesOfState(currentCountry, event.target.value));
   };
-
+console.log(regi);
   return (
-    <div className="register-container">
-      <form onSubmit={handleSubmit(onSubmit)} className="register-form">
-        <h3>Regitration form</h3>
-        <FormContext.Provider value={{ errors: errors, register: register }}>
-          {/* <Input register={{...register("name", { required: true })}} errors={errors}/> */}
-
+    <div className={regi.registerContainer}>
+      
+      <div className={regi.registerFormContainer}>
+      <div style={{display:"block"}}>
+        <Link style={{float:"right",padding:"10px"}} to="/login">Login</Link>
+      </div>
+      <h3 className={regi.registerFormHeading}>Regitration form</h3>
+      
+      <form onSubmit={handleSubmit(onSubmit)} className={regi.registerForm}>
+        <FormContext.Provider value={{ errors: errors, register: register, control:control }}>
           <Input values={{ name: "name", text: "Name", type: "text" }} />
           <Input values={{ name: "initial", text: "Initial", type: "text" }} />
           <Input values={{ name: "email", text: "Email", type: "email" }} />
@@ -107,33 +114,14 @@ export default function Register() {
               ref: "name",
             }}
           />
-          {/* <Select register={register("state")} values={{name:"state",text:"State",optionsArr:countriesArr,ref:"isoCode"}} onChange={handleStateChange}/> */}
+          <Input values={{ name: "password", text: "Password", type: "password" }} />
+          <Input values={{ name: "confirmPassword", text: "Confirm Password", type: "password" }} />
         </FormContext.Provider>
-
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            {...register("password", { required: true })}
-            id="password"
-          />
-          {errors.password && (
-            <span className="error">{errors.password.message}</span>
-          )}
+        <div className={regi.formInputButton}>
+        <button className={regi.button} type="submit">Register</button>
         </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            {...register("confirmPassword", { required: true })}
-            id="confirmPassword"
-          />
-          {errors.confirmPassword && (
-            <span className="error">{errors.confirmPassword.message}</span>
-          )}
-        </div>
-        <button type="submit">Register</button>
       </form>
+      </div>
     </div>
   );
 }

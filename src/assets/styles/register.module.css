@@ -1,16 +1,11 @@
-* {
-  margin: 0;
-  padding: 0;
-  border: none;
-  box-sizing: border-box;
-}
-.register-container {
-  padding: 30px 0;
+/* .hookForm{} */
+.registerContainer {
+  padding: 100px 0;
   background-color: #ddd;
 }
 
-.register-form-container {
-  max-width: 1000px;
+.registerFormContainer {
+  max-width: 900px;
   margin: 0 auto;
   font-family: Arial, sans-serif;
   background-color: #fff;
@@ -18,89 +13,90 @@
   border-radius: 5px;
 }
 
-.register-form {
+.registerForm {
   padding: 30px;
   display: grid;
   grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
   gap: 10px;
 }
-.register-form-h3 {
+.registerFormHeading {
   padding-left: 30px;
 }
-label {
+.label {
   display: block;
   margin-bottom: 1px;
 }
 
-.form-input-name {
+.formInput_name {
   grid-column: span 3;
 }
-.form-input-phone, .form-input-state,.form-input-password,.form-input-confirmPassword {
+.formInput_phone,
+.formInput_state,
+.formInput_password,
+.formInput_confirmPassword {
   grid-column: span 2;
 }
-.form-input-button {
+.formInput_button {
   padding: 5% 10%;
   grid-column-start: 4;
 }
 
 @media (max-width: 645px) {
-  .form-input-name,
-  .form-input-initial,
-  .form-input-email,
-  .form-input-phone,
-  .form-input-address,
-  .form-input-country,
-  .form-input-state,
-  .form-input-district {
+  .formInput_name,
+  .formInput_initial,
+  .formInput_email,
+  .formInput_phone,
+  .formInput_address,
+  .formInput_country,
+  .formInput_state,
+  .formInput_district {
     grid-column: span 2;
   }
-  .form-input-phone {
+  .formInput_password {
   }
-  .form-input-address {
+  .formInput_confirmPassword {
   }
-  .form-input-country {
-  }
-  .form-input-state {
-  }
-  .form-input-district {
-  }
-  .form-input-password {
-  }
-  .form-input-confirmPassword {
-  }
-  .form-input-button {
+  .formInput_button {
   }
 }
 
-input,
-textarea,
-select {
+.input,
+.textarea,
+.select {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  margin-bottom: 5px;
 }
-textarea {
+.textarea {
+  resize: vertical;
   height: 34px;
 }
 
-select {
+.select {
   cursor: pointer;
 }
 
-button {
+.button {
   background-color: #4caf50;
   color: white;
-  padding: 5% 10%;
+  padding: 5px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-button:disabled {
+.button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.input{
+  display: block;
+  height: 34px;
+
 }
 
 /* Optional: Add some spacing and styling for better readability */
@@ -115,10 +111,6 @@ button:disabled {
   form > div select {
     display: block;
   } */
-
-form > div textarea {
-  resize: vertical;
-}
 
 /* Optional: Style error messages */
 
