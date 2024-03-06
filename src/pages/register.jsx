@@ -6,8 +6,10 @@ import { Country, State, City } from "country-state-city";
 // import "../assets/styles/register.css";
 import regi from '../assets/styles/register.module.css';
 import Input, { Select, TextArea } from "../components/hook-form/Input";
-import { FormContext } from "../components/hook-form/FormContext";
+import { FormContext } from "../Contexts/FormContext";
 import { Link } from "react-router-dom";
+import {auth} from "../firebase/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 let countriesArr = Country.getAllCountries();
 let statesArr = undefined;
@@ -60,6 +62,9 @@ export default function Register() {
   } = useForm({ resolver: zodResolver(schema) });
   //
   const onSubmit = (data) => {
+    createUserWithEmailAndPassword(auth,data.email,data.password)
+    .then( (userCredentials)=>console.log(userCredentials))
+    .catch(err=>{console.log(err);})
     console.log(data);
   };
   const [currentCountry, setCurrentCountry] = useState(undefined);
@@ -71,14 +76,11 @@ export default function Register() {
   const handleStateChange = (event) => {
     setDistrictsArr(City.getCitiesOfState(currentCountry, event.target.value));
   };
-console.log(regi);
   return (
     <div className={regi.registerContainer}>
       
       <div className={regi.registerFormContainer}>
-      <div style={{display:"block"}}>
-        <Link style={{float:"right",padding:"10px"}} to="/login">Login</Link>
-      </div>
+      
       <h3 className={regi.registerFormHeading}>Regitration form</h3>
       
       <form onSubmit={handleSubmit(onSubmit)} className={regi.registerForm}>
@@ -117,10 +119,14 @@ console.log(regi);
           <Input values={{ name: "password", text: "Password", type: "password" }} />
           <Input values={{ name: "confirmPassword", text: "Confirm Password", type: "password" }} />
         </FormContext.Provider>
-        <div className={regi.formInputButton}>
+        
+        <div className={regi.formInput_button}>
         <button className={regi.button} type="submit">Register</button>
         </div>
       </form>
+      <div style={{display:"block",padding:"10px 0 0 5%"}}>
+        <Link style={{padding:"10px"}} to="/login">Login</Link>
+      </div>
       </div>
     </div>
   );

@@ -1,7 +1,10 @@
 /* .hookForm{} */
 .registerContainer {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
   padding: 100px 0;
-  background-color: #ddd;
 }
 
 .registerFormContainer {
@@ -9,15 +12,19 @@
   margin: 0 auto;
   font-family: Arial, sans-serif;
   background-color: #fff;
-  padding: 20px 0 0 0;
+  border: 1px solid #ccc;
+
+  padding: 20px 0;
   border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .registerForm {
-  padding: 30px;
+  margin: 30px 30px 0 30px;
   display: grid;
   grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
   gap: 10px;
+  border-bottom: 1px solid gray;
 }
 .registerFormHeading {
   padding-left: 30px;
@@ -57,6 +64,25 @@
   .formInput_confirmPassword {
   }
   .formInput_button {
+    grid-column: 4 / 5;
+  }
+}
+
+@media (max-width: 412px) {
+  .formInput_name,
+  .formInput_initial,
+  .formInput_email,
+  .formInput_phone,
+  .formInput_address,
+  .formInput_country,
+  .formInput_state,
+  .formInput_district,
+  .formInput_password,
+  .formInput_confirmPassword {
+    grid-column: span 4;
+  }
+  .formInput_button {
+    grid-column: -3/-1;
   }
 }
 
@@ -82,7 +108,7 @@
 .button {
   background-color: #4caf50;
   color: white;
-  padding: 5px 10px;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;

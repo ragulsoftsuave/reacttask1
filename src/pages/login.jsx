@@ -1,47 +1,63 @@
 import React, { useState } from 'react';
 import logi from "../assets/styles/login.module.css";
-
-const Login = () => {
-  const [username, setUsername] = useState('');
+import { Link, Navigate } from 'react-router-dom';
+// import {signInWithEmailAndPassword} from "firebase/auth";
+// import {auth} from "../firebase/firebase";
+import { doSignInWithEmailAndPassword } from '../firebase/auth';
+import { useAuth, } from '../Contexts/AuthContext';
+const Login = ({history}) => {
+  const {userLoggedIn} =useAuth();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  console.log(useAuth);
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (username === 'demo' && password === 'password') {
-      console.log('Login successful');
-      setError('');
-    } else {
-      setError('Invalid username or password');
-    }
+    // signInWithEmailAndPassword(auth,email,password)
+    // .then( (userCredentials)=>{console.log(userCredentials);setError('')})
+    // .catch(err=>{console.log(err);setError(err.code.split("/")[1])})
+    doSignInWithEmailAndPassword(email,password,setError);
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
+    <div className={logi.loginCenterContainer}>
+    <div className={logi.loginContainer}>
+      {userLoggedIn &&(<Navigate to={'/todo'} replace={true} />)}
+      <div className={logi.banner}>
+        <img src="logi.png" alt="" />
+      </div>
+      <div className={logi.loginSide}>
+      <div className={logi.loginFormContainer}>
+      <form className={logi.loginForm} onSubmit={handleSubmit}>
         <h2>Login</h2>
-        {error && <div className="error">{error}</div>}
+        {<div className={logi?.error}>{error}</div>}
         <div>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+          <label className={logi.label} htmlFor="email">Email</label>
+          <input className={logi.input}
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
-          <input
+          <label className={logi.label} htmlFor="password">Password</label>
+          <input className={logi.input}
             type="password"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">Login</button>
+        <button className={logi.button} type="submit">Login</button>
       </form>
+      <div style={{display:"block",padding:"10px 0 0 5%"}}>
+        <Link style={{padding:"10px"}} to="/register">register</Link>
+      </div>
+      </div>
+      </div>
+    </div>
     </div>
   );
 };

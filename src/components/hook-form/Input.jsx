@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FormContext } from "./FormContext";
+import { FormContext } from "../../Contexts/FormContext";
 import regi from "../../assets/styles/register.module.css";
 import { Controller } from "react-hook-form";
 
@@ -9,7 +9,7 @@ import { Controller } from "react-hook-form";
     const register=contextValues.register;
     return <div className={`${regi['formInput_'+values?.name]}`}>
       <label className={regi.label} htmlFor={values?.name}>{values?.text}</label>
-      <input className={regi.input} {...register(values?.name)} id={values?.name} />
+      <input type={values?.type} className={regi.input} {...register(values?.name)} id={values?.name} />
       {<div className={regi.error}>{errors[values?.name]?.message}</div>}
     </div>;
   }

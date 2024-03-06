@@ -1,16 +1,24 @@
 .loginContainer {
     display: flex;
     justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 100vh;
   }
-  
-  .loginForm {
-    max-width: 300px;
-    padding: 20px;
+
+  .loginFormContainer{
+    max-width: 5y00px;
+    padding: 40px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loginForm {
+    /* margin: 30px 30px 0 30px; */
+    padding-bottom:10px ;
+    gap: 10px;
+    border-bottom: 1px solid gray;
   }
   
   .h2 {
@@ -36,10 +44,11 @@
     color: red;
     font-size: 14px;
     margin-bottom: 10px;
+    /* height: 5px; */
   }
   
   .button {
-    background-color: #4caf50;
+    background-color: #00709c;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -50,5 +59,25 @@
   
   .button:hover {
     background-color: #45a049;
+  }
+
+  .banner{
+    background-color: #005b80;
+    width: 30%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img{
+      width: 200px;
+    }
+  }
+
+  .loginSide{
+    width: 69%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   

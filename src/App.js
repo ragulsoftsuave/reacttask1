@@ -7,6 +7,7 @@ import Todo from './pages/todo';
 import Login from './pages/login';
 import Register from './pages/register';
 import Temp from './pages/temp';
+import { AuthProvider } from './Contexts/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
+      <AuthProvider>
       <RouterProvider router={router}/>
+      </AuthProvider>
     </div>
   );
 }
