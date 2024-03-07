@@ -1,0 +1,29 @@
+[{
+    "Header": "Name",
+    "accessor": "name"
+  },
+  {
+    "Header": "Initial",
+    "accessor": "initial"
+  },
+  {
+    "Header": "Email",
+    "accessor": "email"
+  },
+  {
+    "Header": "Phone",
+    "accessor": "phone"
+  },
+  {
+    "Header": "Address",
+    "accessor": "address"
+  },{
+    "Header": "country",
+    "accessor": "country"
+  },{
+    "Header": "State",
+    "accessor": "state"
+  },{
+    "Header": "District",
+    "accessor": "district"
+  }]

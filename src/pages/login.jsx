@@ -23,15 +23,14 @@ const Login = ({history}) => {
   return (
     <div className={logi.loginCenterContainer}>
     <div className={logi.loginContainer}>
-      {userLoggedIn &&(<Navigate to={'/todo'} replace={true} />)}
+      {userLoggedIn &&(<Navigate to={'/'} replace={true} />)}
       <div className={logi.banner}>
         <img src="logi.png" alt="" />
       </div>
       <div className={logi.loginSide}>
       <div className={logi.loginFormContainer}>
       <form className={logi.loginForm} onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        {<div className={logi?.error}>{error}</div>}
+        <h2 className={logi.h2}>Login</h2>
         <div>
           <label className={logi.label} htmlFor="email">Email</label>
           <input className={logi.input}
@@ -51,9 +50,11 @@ const Login = ({history}) => {
           />
         </div>
         <button className={logi.button} type="submit">Login</button>
+        {<div className={logi?.error}>{error}</div>}
+
       </form>
-      <div style={{display:"block",padding:"10px 0 0 5%"}}>
-        <Link style={{padding:"10px"}} to="/register">register</Link>
+      <div style={{display:"block",padding:"30px 0 0 0"}}>
+        <Link className={logi.regiLink}  to="/register">register</Link>
       </div>
       </div>
       </div>
